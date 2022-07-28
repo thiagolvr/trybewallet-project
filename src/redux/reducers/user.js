@@ -9,7 +9,7 @@ const user = (state = INITIAL_STATE, { type, payload }) => {
   case GET_EMAIL_USER:
     return {
       ...state,
-      ...payload,
+      email: payload,
     };
   default:
     return state;
