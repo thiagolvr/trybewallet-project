@@ -1,5 +1,5 @@
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
-import { GET_WALLET_INFO } from '../../helpers/constants';
+import { GET_CURRENCIES } from '../../helpers/constants';
 
 const INITIAL_STATE = {
   currencies: [],
@@ -10,10 +10,10 @@ const INITIAL_STATE = {
 
 const wallet = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
-  case GET_WALLET_INFO:
+  case GET_CURRENCIES:
     return {
       ...state,
-      ...payload,
+      currencies: payload,
     };
   default:
     return state;

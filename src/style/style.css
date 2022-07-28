@@ -8,7 +8,6 @@
   padding: 2em;
 }
 
-
 body .form-login {
   display: flex;
   height: 10em;
@@ -17,14 +16,13 @@ body .form-login {
   width: 15em;
 }
 
-.header-info {
+.header-info , .wallet-form {
   display: flex;
   justify-content: space-around;
   width: auto;
 }
 
-
-.form-login-button , input {
+.form-login input {
   margin-top: 2em;
 }
 
