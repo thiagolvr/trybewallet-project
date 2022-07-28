@@ -1,0 +1,36 @@
+.form-login {
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2em;
+}
+
+
+body .form-login {
+  display: flex;
+  height: 10em;
+  justify-content: center;
+  margin: 15em auto;
+  width: 15em;
+}
+
+.header-info {
+  display: flex;
+  justify-content: space-around;
+  width: auto;
+}
+
+
+.form-login-button , input {
+  margin-top: 2em;
+}
+
+.form-login-button {
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 2.3em;
+}

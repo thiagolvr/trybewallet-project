@@ -33,9 +33,10 @@ class Login extends React.Component {
   render() {
     const { inputEmail, inputPassword, isDisabled } = this.state;
     return (
-      <form onSubmit={ this.handleSubmit }>
+      <form className="form-login" onSubmit={ this.handleSubmit }>
         <label htmlFor="inputEmail">
           Email:
+          {' '}
           <input
             data-testid="email-input"
             type="text"
@@ -48,6 +49,7 @@ class Login extends React.Component {
 
         <label htmlFor="inputPassword">
           Senha:
+          {' '}
           <input
             data-testid="password-input"
             type="inputPassword"
@@ -59,6 +61,7 @@ class Login extends React.Component {
         </label>
 
         <button
+          className="form-login-button"
           type="submit"
           disabled={ isDisabled }
         >
