@@ -1,0 +1,2 @@
+export const GET_EMAIL_USER = 'GET_EMAIL_USER';
+export const GET_WALLET_INFO = 'GET_WALLET_INFO';
