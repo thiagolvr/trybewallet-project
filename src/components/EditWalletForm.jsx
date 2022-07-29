@@ -1,12 +1,28 @@
-/* eslint-disable react/prop-types */
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { SAVE_EXPENSE, RELOAD_VALUES } from '../helpers/constants';
 
 class EditWalletForm extends React.Component {
-  constructor({ expenseToEdit:
-     { value, description, currency, method, tag, exchangeRates } }) {
-    super({ expenseToEdit: { value, description, currency, method, tag } });
+  constructor(
+    { expenseToEdit:
+     {
+       value,
+       description,
+       currency,
+       method, tag,
+       exchangeRates,
+     } },
+  ) {
+    super(
+      { expenseToEdit:
+         { value,
+           description,
+           currency,
+           method,
+           tag },
+      },
+    );
     this.state = {
       value,
       description,
@@ -127,6 +143,22 @@ class EditWalletForm extends React.Component {
     );
   }
 }
+
+EditWalletForm.propTypes = {
+  currencies: PropTypes.shape({
+    map: PropTypes.func,
+  }).isRequired,
+  expenseToEdit: PropTypes.shape({
+    id: PropTypes.number,
+    value: PropTypes.string,
+    description: PropTypes.string,
+    currency: PropTypes.string,
+    method: PropTypes.string,
+    tag: PropTypes.string,
+    exchangeRates: PropTypes.arrayOf(PropTypes.any),
+  }).isRequired,
+  dispatch: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = ({ wallet }) => wallet;
 
