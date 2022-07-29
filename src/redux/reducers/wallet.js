@@ -1,5 +1,8 @@
 import {
-  GET_CURRENCIES, GET_EXPENSES, GET_TOTAL_VALUE_EXPENSES,
+  GET_CURRENCIES,
+  GET_EXPENSES,
+  GET_TOTAL_VALUE_EXPENSES,
+  REMOVE_EXPENSE,
 } from '../../helpers/constants';
 
 const INITIAL_STATE = {
@@ -29,6 +32,14 @@ const wallet = (state = INITIAL_STATE, { type, payload }) => {
     return {
       ...state,
       totalValueExpenses: +state.totalValueExpenses + +payload,
+    };
+
+  case REMOVE_EXPENSE:
+    return {
+      state,
+      ...state,
+      expenses: [...state.expenses.filter(({ id }) => id !== payload.id)],
+      totalValueExpenses: Math.abs(+state.totalValueExpenses - payload.value),
     };
 
   default:

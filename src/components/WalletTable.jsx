@@ -3,6 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class WalletTable extends React.Component {
+  handleClick = (id, value) => {
+    const { dispatch } = this.props;
+    dispatch(({ type: 'REMOVE_EXPENSE', payload: { id, value } }));
+  }
+
   render() {
     const { expenses } = this.props;
     return (
@@ -37,6 +42,18 @@ class WalletTable extends React.Component {
                     <td>{(+ask).toFixed(2)}</td>
                     <td>{(+expense.value * ask).toFixed(2)}</td>
                     <td>Real</td>
+                    <td>
+                      <button
+                        data-testid="delete-btn"
+                        type="button"
+                        onClick={ () => this.handleClick(
+                          expense.id, (+expense.value * ask),
+                        ) }
+                      >
+                        Deletar
+
+                      </button>
+                    </td>
                   </tr>
                 );
               })
@@ -49,6 +66,7 @@ class WalletTable extends React.Component {
 }
 
 WalletTable.propTypes = {
+  dispatch: PropTypes.func.isRequired,
   expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
