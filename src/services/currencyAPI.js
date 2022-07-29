@@ -1,6 +1,6 @@
 const CURRENCY_API = 'https://economia.awesomeapi.com.br/json/all';
 
-const currencyAPI = async () => {
+export const currencyAPI = async () => {
   try {
     const response = await fetch(CURRENCY_API);
     const currencies = await response.json();
@@ -12,4 +12,12 @@ const currencyAPI = async () => {
   }
 };
 
-export default currencyAPI;
+export const currencyAPIComplete = async () => {
+  try {
+    const response = await fetch(CURRENCY_API);
+    const currencies = await response.json();
+    return currencies;
+  } catch (error) {
+    console.log(error);
+  }
+};
