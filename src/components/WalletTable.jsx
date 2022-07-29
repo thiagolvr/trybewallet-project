@@ -3,9 +3,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 class WalletTable extends React.Component {
-  handleClick = (id, value) => {
+  handleClick = ({ target: { name } }, id, value) => {
     const { dispatch } = this.props;
-    dispatch(({ type: 'REMOVE_EXPENSE', payload: { id, value } }));
+    return name === 'delete'
+      ? dispatch(({ type: 'REMOVE_EXPENSE', payload: { id, value } }))
+      : dispatch(({ type: 'EDIT_EXPENSE', payload: { id, value } }));
   }
 
   render() {
@@ -31,6 +33,7 @@ class WalletTable extends React.Component {
               expenses.map((expense) => {
                 const { value } = expense;
                 const { name, ask } = expense.exchangeRates[expense.currency];
+                const sum = +ask * +value;
 
                 return (
                   <tr key={ expense.id }>
@@ -40,15 +43,24 @@ class WalletTable extends React.Component {
                     <td>{(+value).toFixed(2)}</td>
                     <td>{name}</td>
                     <td>{(+ask).toFixed(2)}</td>
-                    <td>{(+expense.value * ask).toFixed(2)}</td>
+                    <td>{sum.toFixed(2)}</td>
                     <td>Real</td>
                     <td>
                       <button
+                        data-testid="edit-btn"
+                        type="button"
+                        name="edit"
+                        onClick={ (e) => this.handleClick(e, expense.id) }
+                      >
+                        Editar
+
+                      </button>
+                      <button
                         data-testid="delete-btn"
                         type="button"
-                        onClick={ () => this.handleClick(
-                          expense.id, (+expense.value * ask),
-                        ) }
+                        name="delete"
+                        onClick={ (e) => this.handleClick(e,
+                          expense.id, (+expense.value * ask)) }
                       >
                         Deletar
 

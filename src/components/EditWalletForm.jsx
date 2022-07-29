@@ -1,59 +1,45 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
+/* eslint-disable react/prop-types */
+import React from 'react';
 import { connect } from 'react-redux';
-import { currencyAPI, currencyAPIComplete } from '../services/currencyAPI';
-import {
-  GET_CURRENCIES, GET_EXPENSES, GET_TOTAL_VALUE_EXPENSES,
-} from '../helpers/constants';
+import { SAVE_EXPENSE, RELOAD_VALUES } from '../helpers/constants';
 
-class WalletForm extends Component {
-  state = {
-    value: '',
-    currency: 'USD',
-    method: 'Cartão de crédito',
-    tag: 'Alimentação',
-    description: '',
-  }
-
-  async componentDidMount() {
-    const { dispatch } = this.props;
-    const currencies = await currencyAPI();
-    dispatch({ type: GET_CURRENCIES, payload: currencies });
-  }
-
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value });
-  }
-
-  handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const currencyQuotes = await currencyAPIComplete();
-    const expense = { ...this.state, exchangeRates: currencyQuotes };
-
-    const { dispatch } = this.props;
-    dispatch(({ type: GET_EXPENSES, payload: expense }));
-
-    const { ask } = expense.exchangeRates[expense.currency];
-
-    const totalValueExpenses = expense.value * ask;
-    dispatch({ type: GET_TOTAL_VALUE_EXPENSES, payload: totalValueExpenses });
-
-    this.setState({ value: '', description: '' });
-  }
-
-  render() {
-    const { currencies } = this.props;
-    const {
+class EditWalletForm extends React.Component {
+  constructor({ expenseToEdit:
+     { value, description, currency, method, tag, exchangeRates } }) {
+    super({ expenseToEdit: { value, description, currency, method, tag } });
+    this.state = {
       value,
       description,
       currency,
       method,
       tag,
-    } = this.state;
+      exchangeRates,
+    };
+  }
+
+  handleChange = ({ target: { name, value: valueInput } }) => {
+    this.setState({ [name]: valueInput });
+  };
+
+  handleSubmit = (e, id, expense) => {
+    e.preventDefault();
+
+    const { dispatch } = this.props;
+    dispatch({ type: SAVE_EXPENSE, payload: { ...expense, id } });
+
+    dispatch({ type: RELOAD_VALUES });
+  }
+
+  render() {
+    const { currencies, expenseToEdit: { id } } = this.props;
+    const { value, description, currency, method, tag } = this.state;
+    console.log(id);
 
     return (
-      <form className="wallet-form" onSubmit={ this.handleSubmit }>
+      <form
+        className="wallet-form"
+        onSubmit={ (e) => this.handleSubmit(e, id, this.state) }
+      >
 
         <label htmlFor="value">
           Digite um valor:
@@ -136,16 +122,12 @@ class WalletForm extends Component {
           </select>
         </label>
 
-        <button type="submit">Adicionar despesa</button>
+        <button type="submit">Editar despesa</button>
       </form>
     );
   }
 }
-WalletForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.any).isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
 
 const mapStateToProps = ({ wallet }) => wallet;
 
-export default connect(mapStateToProps)(WalletForm);
+export default connect(mapStateToProps)(EditWalletForm);
