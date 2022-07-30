@@ -33,8 +33,8 @@ class EditWalletForm extends React.Component {
     };
   }
 
-  handleChange = ({ target: { name, value: valueInput } }) => {
-    this.setState({ [name]: valueInput });
+  handleChange = ({ target: { id, value: valueInput } }) => {
+    this.setState({ [id]: valueInput });
   };
 
   handleSubmit = (e, id, expense) => {
@@ -42,14 +42,12 @@ class EditWalletForm extends React.Component {
 
     const { dispatch } = this.props;
     dispatch({ type: SAVE_EXPENSE, payload: { ...expense, id } });
-
     dispatch({ type: RELOAD_VALUES });
   }
 
   render() {
     const { currencies, expenseToEdit: { id } } = this.props;
     const { value, description, currency, method, tag } = this.state;
-    console.log(id);
 
     return (
       <form
@@ -63,7 +61,6 @@ class EditWalletForm extends React.Component {
           <input
             data-testid="value-input"
             type="number"
-            name="value"
             id="value"
             value={ value }
             onChange={ this.handleChange }
@@ -76,7 +73,6 @@ class EditWalletForm extends React.Component {
           <input
             data-testid="description-input"
             type="text"
-            name="description"
             id="description"
             value={ description }
             onChange={ this.handleChange }
@@ -88,7 +84,6 @@ class EditWalletForm extends React.Component {
           {' '}
           <select
             data-testid="currency-input"
-            name="currency"
             id="currency"
             value={ currency }
             onChange={ this.handleChange }
@@ -107,7 +102,6 @@ class EditWalletForm extends React.Component {
           {' '}
           <select
             data-testid="method-input"
-            name="method"
             id="method"
             value={ method }
             onChange={ this.handleChange }
@@ -124,7 +118,6 @@ class EditWalletForm extends React.Component {
           {' '}
           <select
             data-testid="tag-input"
-            name="tag"
             id="tag"
             value={ tag }
             onChange={ this.handleChange }
@@ -145,18 +138,8 @@ class EditWalletForm extends React.Component {
 }
 
 EditWalletForm.propTypes = {
-  currencies: PropTypes.shape({
-    map: PropTypes.func,
-  }).isRequired,
-  expenseToEdit: PropTypes.shape({
-    id: PropTypes.number,
-    value: PropTypes.string,
-    description: PropTypes.string,
-    currency: PropTypes.string,
-    method: PropTypes.string,
-    tag: PropTypes.string,
-    exchangeRates: PropTypes.arrayOf(PropTypes.any),
-  }).isRequired,
+  currencies: PropTypes.arrayOf(PropTypes.any).isRequired,
+  expenseToEdit: PropTypes.objectOf(PropTypes.any).isRequired,
   dispatch: PropTypes.func.isRequired,
 };
 

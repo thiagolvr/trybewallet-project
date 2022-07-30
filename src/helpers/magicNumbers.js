@@ -1,2 +1,3 @@
-export const NUMBER_FIVE = 5;
-export const NUMBER_ZERO = 0;
+const NUMBER_FIVE = 5;
+
+export default NUMBER_FIVE;

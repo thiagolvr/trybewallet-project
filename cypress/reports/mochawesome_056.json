@@ -1,0 +1,133 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 2,
+    "passes": 0,
+    "pending": 0,
+    "failures": 2,
+    "start": "2022-07-30T02:08:23.244Z",
+    "end": "2022-07-30T02:08:25.126Z",
+    "duration": 1882,
+    "testsRegistered": 2,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "e16c8cb4-a0da-4fb0-9150-399a0f46f2a1",
+      "title": "",
+      "fullFile": "cypress/integration/secrets/08.Startest_spec.js",
+      "file": "cypress/integration/secrets/08.Startest_spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "41432b0a-cf90-474a-96d9-9b25db459591",
+          "title": "Requisito 8 Startest não avaliativo",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "🌟 Startest - Desenvolva os testes automatizados do requisito 8 com relação ao componente Table",
+              "fullTitle": "Requisito 8 Startest não avaliativo 🌟 Startest - Desenvolva os testes automatizados do requisito 8 com relação ao componente Table",
+              "timedOut": null,
+              "duration": 85,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const walletStartest = new _startest.default({\n  testFileName: '08.star.test.js',\n  componentPath: 'src/components/Table',\n  mockName: 'Table',\n  defaultProps: {\n    shouldRenderDelBtn: true,\n    btnDeleteTestId: _constants.BTN_DELETE_TEST_ID,\n    shouldRemoveFromStore: true,\n    shouldRemoveFromScreen: true\n  }\n});\nconst testCases = [{\n  shouldRenderDelBtn: false\n}, {\n  btnDeleteTestId: ''\n}, {\n  shouldRemoveFromStore: false,\n  shouldRemoveFromScreen: false\n}, {\n  shouldRemoveFromStore: false\n}, {\n  shouldRemoveFromScreen: false\n}];\nconst logCreators = {\n  shouldRenderDelBtn: () => 'Botão de exclusão não foi renderizado',\n  shouldRemoveFromStore: () => 'Despesa não foi removida do estado global',\n  shouldRemoveFromScreen: () => 'A despesa continua sendo exibida na tabela'\n};\nawait walletStartest.runTestCases(testCases, logCreators);",
+              "err": {
+                "message": "[Startest Error]: 🚨 Arquivo \"src/components/Table\" não encontrado 🚨",
+                "estack": "[Startest Error]: 🚨 Arquivo \"src/components/Table\" não encontrado 🚨\n    at Startest.showTestResult (http://localhost:58610/__cypress/tests?p=cypress/integration/secrets/08.Startest_spec.js:829:13)\n    at async Context.eval (http://localhost:58610/__cypress/tests?p=cypress/integration/secrets/08.Startest_spec.js:347:5)",
+                "diff": null
+              },
+              "uuid": "f27bec43-af7b-4a5b-b8d9-0c69908f1de3",
+              "parentUUID": "41432b0a-cf90-474a-96d9-9b25db459591",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "🌟 Startest - Desenvolva os testes automatizados do requisito 8 com relação ao componente Header",
+              "fullTitle": "Requisito 8 Startest não avaliativo 🌟 Startest - Desenvolva os testes automatizados do requisito 8 com relação ao componente Header",
+              "timedOut": null,
+              "duration": 1459,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const headerStartest = new _startest.default({\n  testFileName: '08.star.test.js',\n  componentPath: 'src/components/header',\n  mockName: 'HeaderDelete',\n  defaultProps: {\n    isTotalCorrect: true,\n    shouldUpdateTotal: true\n  }\n});\nconst testCases = [{\n  isTotalCorrect: false\n}, {\n  shouldUpdateTotal: false\n}];\nconst logCreators = {\n  isTotalCorrect: () => 'Total do Header está incorreto',\n  shouldUpdateTotal: () => 'Total do Header não foi atualizado'\n};\nawait headerStartest.runTestCases(testCases, logCreators);",
+              "err": {
+                "message": "[Startest Error]: 🚨 Teste inicial falhou 🚨\n\nCommand failed: npm test 08.star.test.js -- --watchAll=false --json --testFailureExitCode=0 --setupFilesAfterEnv \"<rootDir>/cypress/startest/jestSetup.js\"\nNo tests found, exiting with code 1\nRun with `--passWithNoTests` to exit with code 0\nIn /Users/thiagoliveira/Development/projects/React/sd-022-b-project-trybewallet\n  19 files checked.\n  testMatch: /Users/thiagoliveira/Development/projects/React/sd-022-b-project-trybewallet/src/**/__tests__/**/*.{js,jsx,ts,tsx}, /Users/thiagoliveira/Development/projects/React/sd-022-b-project-trybewallet/src/**/*.{spec,test}.{js,jsx,ts,tsx} - 0 matches\n  testPathIgnorePatterns: /node_modules/ - 19 matches\n  testRegex:  - 0 matches\nPattern: 08.star.test.js - 0 matches\n",
+                "estack": "[Startest Error]: 🚨 Teste inicial falhou 🚨\n\nCommand failed: npm test 08.star.test.js -- --watchAll=false --json --testFailureExitCode=0 --setupFilesAfterEnv \"<rootDir>/cypress/startest/jestSetup.js\"\nNo tests found, exiting with code 1\nRun with `--passWithNoTests` to exit with code 0\nIn /Users/thiagoliveira/Development/projects/React/sd-022-b-project-trybewallet\n  19 files checked.\n  testMatch: /Users/thiagoliveira/Development/projects/React/sd-022-b-project-trybewallet/src/**/__tests__/**/*.{js,jsx,ts,tsx}, /Users/thiagoliveira/Development/projects/React/sd-022-b-project-trybewallet/src/**/*.{spec,test}.{js,jsx,ts,tsx} - 0 matches\n  testPathIgnorePatterns: /node_modules/ - 19 matches\n  testRegex:  - 0 matches\nPattern: 08.star.test.js - 0 matches\n\n    at Startest.showTestResult (http://localhost:58610/__cypress/tests?p=cypress/integration/secrets/08.Startest_spec.js:829:13)\n    at async Context.eval (http://localhost:58610/__cypress/tests?p=cypress/integration/secrets/08.Startest_spec.js:368:5)",
+                "diff": null
+              },
+              "uuid": "9e61c947-bcae-4650-941f-3ee78e3a952e",
+              "parentUUID": "41432b0a-cf90-474a-96d9-9b25db459591",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f27bec43-af7b-4a5b-b8d9-0c69908f1de3",
+            "9e61c947-bcae-4650-941f-3ee78e3a952e"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 1544,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "id": "default",
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

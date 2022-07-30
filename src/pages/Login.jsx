@@ -9,38 +9,42 @@ class Login extends React.Component {
     inputEmail: '',
     inputPassword: '',
     isDisabled: true,
-  }
+  };
 
-  handleChange = ({ target: { name, value } }) => {
-    this.setState({ [name]: value }, () => {
+  handleChange = ({ target: { id, value } }) => {
+    this.setState({ [id]: value }, () => {
       this.setState((prevState) => ({
         isDisabled: !formValidator(prevState),
       }));
     });
-  }
+  };
 
   handleSubmit = (e) => {
     e.preventDefault();
 
-    const { dispatch, history: { push } } = this.props;
+    const {
+      dispatch,
+      history: { push },
+    } = this.props;
     const { inputEmail } = this.state;
 
-    dispatch(({ type: GET_EMAIL_USER, payload: inputEmail }));
+    dispatch({ type: GET_EMAIL_USER, payload: inputEmail });
 
     push('/carteira');
-  }
+  };
 
   render() {
     const { inputEmail, inputPassword, isDisabled } = this.state;
+
     return (
       <form className="form-login" onSubmit={ this.handleSubmit }>
+
         <label htmlFor="inputEmail">
           Email:
           {' '}
           <input
             data-testid="email-input"
             type="text"
-            name="inputEmail"
             id="inputEmail"
             value={ inputEmail }
             onChange={ this.handleChange }
@@ -53,7 +57,6 @@ class Login extends React.Component {
           <input
             data-testid="password-input"
             type="inputPassword"
-            name="inputPassword"
             id="inputPassword"
             value={ inputPassword }
             onChange={ this.handleChange }
@@ -66,8 +69,8 @@ class Login extends React.Component {
           disabled={ isDisabled }
         >
           Entrar
-
         </button>
+
       </form>
     );
   }
@@ -75,9 +78,7 @@ class Login extends React.Component {
 
 Login.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  history: PropTypes.shape({
-    push: PropTypes.func,
-  }).isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default connect()(Login);

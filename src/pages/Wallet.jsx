@@ -9,6 +9,7 @@ import WalletTable from '../components/WalletTable';
 class Wallet extends React.Component {
   render() {
     const { editor } = this.props;
+
     return (
       <div>
         <Header />

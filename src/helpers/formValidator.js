@@ -1,5 +1,5 @@
 import * as EmailValidator from 'email-validator';
-import { NUMBER_FIVE } from './magicNumbers';
+import NUMBER_FIVE from './magicNumbers';
 
 const formValidator = ({ inputEmail, inputPassword }) => {
   const emailIsValid = EmailValidator.validate(inputEmail);
