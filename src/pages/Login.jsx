@@ -1,84 +1,72 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { GET_EMAIL_USER } from '../helpers/constants';
 import formValidator from '../helpers/formValidator';
 
-class Login extends React.Component {
-  state = {
-    inputEmail: '',
-    inputPassword: '',
-    isDisabled: true,
-  };
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  handleChange = ({ target: { id, value } }) => {
-    this.setState({ [id]: value }, () => {
-      this.setState((prevState) => ({
-        isDisabled: !formValidator(prevState),
-      }));
-    });
-  };
+  const dispatch = useDispatch();
+  const { push } = useHistory();
 
-  handleSubmit = (e) => {
+  const handleChange = ({ target: { id, value } }) => (
+    id === 'inputEmail'
+      ? setEmail(value)
+      : setPassword(value)
+  );
+
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    const {
-      dispatch,
-      history: { push },
-    } = this.props;
-    const { inputEmail } = this.state;
-
-    dispatch({ type: GET_EMAIL_USER, payload: inputEmail });
+    dispatch({ type: GET_EMAIL_USER, payload: email });
 
     push('/carteira');
   };
 
-  render() {
-    const { inputEmail, inputPassword, isDisabled } = this.state;
+  useEffect(() => {
+    setIsDisabled(!formValidator(email, password));
+  }, [email, password]);
 
-    return (
-      <form className="form-login" onSubmit={ this.handleSubmit }>
+  return (
+    <form className="form-login" onSubmit={ handleSubmit }>
 
-        <label htmlFor="inputEmail">
-          Email:
-          {' '}
-          <input
-            data-testid="email-input"
-            type="text"
-            id="inputEmail"
-            value={ inputEmail }
-            onChange={ this.handleChange }
-          />
-        </label>
+      <label htmlFor="inputEmail">
+        Email:
+        {' '}
+        <input
+          data-testid="email-input"
+          type="text"
+          id="inputEmail"
+          value={ email }
+          onChange={ handleChange }
+        />
+      </label>
 
-        <label htmlFor="inputPassword">
-          Senha:
-          {' '}
-          <input
-            data-testid="password-input"
-            type="inputPassword"
-            id="inputPassword"
-            value={ inputPassword }
-            onChange={ this.handleChange }
-          />
-        </label>
+      <label htmlFor="inputPassword">
+        Senha:
+        {' '}
+        <input
+          data-testid="password-input"
+          type="inputPassword"
+          id="inputPassword"
+          value={ password }
+          onChange={ handleChange }
+        />
+      </label>
 
-        <button
-          className="form-login-button"
-          type="submit"
-          disabled={ isDisabled }
-        >
-          Entrar
-        </button>
+      <button
+        className="form-login-button"
+        type="submit"
+        disabled={ isDisabled }
+      >
+        Entrar
+      </button>
 
-      </form>
-    );
-  }
+    </form>
+  );
 }
 
-Login.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  history: PropTypes.objectOf(PropTypes.any).isRequired,
-};
-
-export default connect()(Login);
+export default Login;
