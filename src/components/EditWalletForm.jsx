@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { connect } from 'react-redux';
+import React, {useState} from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { SAVE_EXPENSE, RELOAD_VALUES } from '../helpers/constants';
 
 import {
@@ -17,40 +16,60 @@ import {
 
 import { AddIcon } from '@chakra-ui/icons';
 
-class EditWalletForm extends React.Component {
-  constructor({
-    expenseToEdit: { value, description, currency, method, tag, exchangeRates },
-  }) {
-    super({ expenseToEdit: { value, description, currency, method, tag } });
-    this.state = {
-      value,
-      description,
-      currency,
-      method,
-      tag,
-      exchangeRates,
-    };
+function EditWalletForm() {
+  const {expenseToEdit, currencies, editor } = useSelector(({wallet}) => wallet)
+
+  const [value, setValue] = useState(expenseToEdit.value)
+  const [description, setDescription] = useState(expenseToEdit.description)
+  const [currency, setCurrency] = useState(expenseToEdit.currency)
+  const [method, setMethod ]= useState(expenseToEdit.method)
+  const [tag, setTag]= useState(expenseToEdit.tag)
+  const [exchangeRates] = useState(expenseToEdit.exchangeRates)
+
+  const expense = {
+    value,
+    description,
+    currency,
+    method,
+    tag,
+    exchangeRates
   }
 
-  handleChange = ({ target: { id, value: valueInput } }) => {
-    this.setState({ [id]: valueInput });
+  const dispatch = useDispatch()
+
+  const handleChange = ({ target: { id, value: valueInput } }) => {
+    switch (id) {
+      case 'value':
+        setValue(valueInput);
+        return;
+
+      case 'currency':
+        setCurrency(valueInput);
+        return;
+
+      case 'method':
+        setMethod(valueInput);
+        return;
+
+      case 'tag':
+        setTag(valueInput);
+        return;
+
+      case 'description':
+        setDescription(valueInput);
+        return;
+
+      default:
+        return;
+    }
   };
 
-  handleSubmit = (e, id, expense) => {
+  const handleSubmit = (e, id, expense) => {
     e.preventDefault();
 
-    const { dispatch } = this.props;
     dispatch({ type: SAVE_EXPENSE, payload: { ...expense, id } });
     dispatch({ type: RELOAD_VALUES });
   };
-
-  render() {
-    const {
-      currencies,
-      expenseToEdit: { id },
-      editor,
-    } = this.props;
-    const { value, description, currency, method, tag } = this.state;
 
     return (
       <>
@@ -64,7 +83,7 @@ class EditWalletForm extends React.Component {
         </Heading>
         <form
           className="wallet-form"
-          onSubmit={e => this.handleSubmit(e, id, this.state)}
+          onSubmit={e => handleSubmit(e, expenseToEdit.id, expense)}
         >
           <FormControl>
             <Input
@@ -73,7 +92,7 @@ class EditWalletForm extends React.Component {
               id="value"
               placeholder="Digite um valor"
               value={value}
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </FormControl>
 
@@ -84,7 +103,7 @@ class EditWalletForm extends React.Component {
               id="description"
               placeholder="Digite um descrição"
               value={description}
-              onChange={this.handleChange}
+              onChange={handleChange}
             />
           </FormControl>
 
@@ -95,7 +114,7 @@ class EditWalletForm extends React.Component {
                 data-testid="currency-input"
                 id="currency"
                 value={currency}
-                onChange={this.handleChange}
+                onChange={handleChange}
               >
                 {currencies.map((currencyName, index) => (
                   <option key={index}>{currencyName}</option>
@@ -111,7 +130,7 @@ class EditWalletForm extends React.Component {
                 data-testid="method-input"
                 id="method"
                 value={method}
-                onChange={this.handleChange}
+                onChange={handleChange}
               >
                 <option>Dinheiro</option>
                 <option>Cartão de crédito</option>
@@ -127,7 +146,7 @@ class EditWalletForm extends React.Component {
                 data-testid="tag-input"
                 id="tag"
                 value={tag}
-                onChange={this.handleChange}
+                onChange={handleChange}
               >
                 <option>Alimentação</option>
                 <option>Lazer</option>
@@ -161,14 +180,5 @@ class EditWalletForm extends React.Component {
       </>
     );
   }
-}
 
-EditWalletForm.propTypes = {
-  currencies: PropTypes.arrayOf(PropTypes.any).isRequired,
-  expenseToEdit: PropTypes.objectOf(PropTypes.any).isRequired,
-  dispatch: PropTypes.func.isRequired,
-};
-
-const mapStateToProps = ({ wallet }) => wallet;
-
-export default connect(mapStateToProps)(EditWalletForm);
+export default EditWalletForm

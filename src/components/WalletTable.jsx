@@ -25,13 +25,15 @@ function WalletTable() {
   const dispatch = useDispatch()
   const {expenses} = useSelector(({wallet}) => wallet)
 
-  const handleClick = ({ target: { name } }, id, value) => {
-    return name === 'delete'
-      ? dispatch({ type: REMOVE_EXPENSE, payload: { id, value } })
-          + dispatch({ type: RELOAD_VALUES })
-      : dispatch({ type: EDIT_EXPENSE, payload: { id, value } })
-          + dispatch({ type: RELOAD_VALUES });
-  };
+  const handleRemove = (_e, id, value) => {
+    dispatch({ type: REMOVE_EXPENSE, payload: { id, value } });
+    dispatch({ type: RELOAD_VALUES });
+  }
+
+  const handleEdit = (_e, id, value) => {
+    dispatch({ type: EDIT_EXPENSE, payload: { id, value } });
+    dispatch({ type: RELOAD_VALUES });
+  }
 
     return (
       <TableContainer className='table'>
@@ -74,7 +76,7 @@ function WalletTable() {
                       data-testid="edit-btn"
                       type="button"
                       name="edit"
-                      onClick={ (e) => handleClick(e, expense.id) }
+                      onClick={ (e) => handleEdit(e, expense.id, +expense.value * ask) }
                     >
                       Editar
                     </Button>
@@ -84,7 +86,7 @@ function WalletTable() {
                       type="button"
                       name="delete"
                       onClick={
-                        (e) => handleClick(e, expense.id, +expense.value * ask)
+                        (e) => handleRemove(e, expense.id, +expense.value * ask)
                       }
                     />
                     </Stack>
