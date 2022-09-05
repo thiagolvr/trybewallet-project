@@ -1,16 +1,17 @@
-import PropTypes from 'prop-types';
+import { Button} from '@chakra-ui/react';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import EditWalletForm from '../components/EditWalletForm';
 import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import WalletTable from '../components/WalletTable';
+import { useHistory } from 'react-router-dom';
 
-class Wallet extends React.Component {
-  render() {
-    const { editor } = this.props;
-
+function Wallet() {
+    const history = useHistory()
+    const {editor} = useSelector(({wallet}) => wallet)
     return (
+      <>
       <div className='father'>
         <Header />
         {
@@ -18,14 +19,13 @@ class Wallet extends React.Component {
         }
         <WalletTable />
       </div>
+
+      <div className='logout'>
+        <Button colorScheme='red' onClick={() => history.push('/')}>Sair</Button>
+      </div>
+      </>
     );
   }
-}
 
-Wallet.propTypes = {
-  editor: PropTypes.bool.isRequired,
-};
 
-const mapStateToProps = ({ wallet }) => wallet;
-
-export default connect(mapStateToProps)(Wallet);
+export default Wallet;

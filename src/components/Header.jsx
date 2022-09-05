@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
 import { Heading, Flex, Avatar, Box, Text, Badge } from '@chakra-ui/react';
 
 function Header() {
@@ -38,6 +39,7 @@ function Header() {
       <h4 data-testid="header-currency-field">
         Moeda Base: <strong>BRL</strong>
       </h4>
+      <ColorModeSwitcher></ColorModeSwitcher>
     </div>
   );
 }

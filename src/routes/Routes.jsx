@@ -4,8 +4,7 @@ import Login from '../pages/Login';
 import Wallet from '../pages/Wallet';
 import '../style/style.css';
 
-class Routes extends React.Component {
-  render() {
+function Routes() {
     return (
       <div>
         <Switch>
@@ -14,7 +13,6 @@ class Routes extends React.Component {
         </Switch>
       </div>
     );
-  }
 }
 
 export default Routes;

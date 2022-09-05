@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { GET_EMAIL_USER } from '../helpers/constants';
 import formValidator from '../helpers/formValidator';
 import { ColorModeSwitcher } from '../ColorModeSwitcher';
+import { useToast } from '@chakra-ui/react';
 
 import {
   Flex,
@@ -19,21 +20,30 @@ import {
   InputGroup,
 } from '@chakra-ui/react';
 
-export default function Login2() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
 
   const dispatch = useDispatch();
   const { push } = useHistory();
+  const toast = useToast()
+
 
   const handleChange = ({ target: { id, value } }) =>
     id === 'email' ? setEmail(value) : setPassword(value);
 
   const handleSubmit = e => {
     e.preventDefault();
-
     dispatch({ type: GET_EMAIL_USER, payload: email });
+
+    toast({
+      title: 'Você entrou com sucesso',
+      description: "Seja bem vindo a sua carteira digital.",
+      status: 'success',
+      duration: 9000,
+      isClosable: true,
+    })
 
     push('/carteira');
   };
