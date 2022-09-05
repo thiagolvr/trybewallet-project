@@ -44,7 +44,7 @@ function WalletTable() {
             <Th>Método de pagamento</Th>
             <Th isNumeric>Valor</Th>
             <Th>Moeda</Th>
-            <Th isNumeric>Câmbio utilizado</Th>
+            <Th isNumeric>Câmbio</Th>
             <Th isNumeric>Valor convertido</Th>
             <Th>Moeda de conversão</Th>
             <Th>Editar/Excluir</Th>

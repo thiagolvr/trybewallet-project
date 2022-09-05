@@ -8,20 +8,14 @@ import {
 } from '../helpers/constants';
 
 import {
-  Flex,
-  Box,
   FormControl,
   Input,
   Stack,
-  Button,
   ButtonGroup,
   Heading,
-  Text,
-  useColorModeValue,
-  InputLeftAddon,
-  InputGroup,
-  IconButton,
+  Highlight,
   Select,
+  IconButton,
 } from '@chakra-ui/react';
 
 import { AddIcon } from '@chakra-ui/icons';
@@ -94,6 +88,16 @@ function WalletForm() {
   };
 
   return (
+    <>
+    <Heading lineHeight='tall' as='h5' size='sm' className="heading-form">
+    <Highlight
+    query={['Preencha', 'adicionar']}
+    styles={{ px: '2', py: '1', rounded: 'full', bg: 'teal.100' }}
+  >
+    Preencha o formulário abaixo para adicionar uma despesa.
+  </Highlight>
+</Heading>
+
     <form className="wallet-form" onSubmit={handleSubmit}>
       <FormControl>
         <Input
@@ -111,7 +115,7 @@ function WalletForm() {
           data-testid="description-input"
           type="text"
           id="description"
-          placeholder="Digite um descrição"
+          placeholder="Digite uma descrição"
           value={description}
           onChange={handleChange}
         />
@@ -126,9 +130,11 @@ function WalletForm() {
             value={currency}
             onChange={handleChange}
           >
-            {currencies.map((currencyName, index) => (
+            {
+            currencies.map((currencyName, index) => (
               <option key={index}>{currencyName}</option>
-            ))}
+            ))
+            }
           </Select>
         </Stack>
       </FormControl>
@@ -176,6 +182,7 @@ function WalletForm() {
         />
       </ButtonGroup>
     </form>
+    </>
   );
 }
 
