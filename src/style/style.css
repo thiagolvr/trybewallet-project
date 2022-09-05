@@ -6,11 +6,15 @@
   margin: 0 auto;
 }
 
+.header-info {
+  margin-top: 20px;
+}
 
 .wallet-form, .table {
-  margin-top: 50px;
+  margin-top: 80px;
 }
 
 .table {
   flex-direction: column;
 }
+

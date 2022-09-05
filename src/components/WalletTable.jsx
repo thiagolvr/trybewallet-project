@@ -35,7 +35,7 @@ function WalletTable() {
 
     return (
       <TableContainer className='table'>
-      <Table variant='simple' >
+      <Table variant='simple'>
         <TableCaption>Role para os lados para mais informações</TableCaption>
         <Thead>
           <Tr>

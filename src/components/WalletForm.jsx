@@ -141,7 +141,6 @@ function WalletForm() {
             id="method"
             value={method}
             onChange={handleChange}
-            placeholder="Forma de pagamento"
           >
             <option>Dinheiro</option>
             <option>Cartão de crédito</option>
@@ -158,7 +157,6 @@ function WalletForm() {
             id="tag"
             value={tag}
             onChange={handleChange}
-            placeholder="Tag"
           >
             <option>Alimentação</option>
             <option>Lazer</option>
