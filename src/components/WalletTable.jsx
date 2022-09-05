@@ -1,6 +1,5 @@
-import PropTypes from 'prop-types';
 import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   EDIT_EXPENSE,
   RELOAD_VALUES,
@@ -22,9 +21,11 @@ import {
 } from '@chakra-ui/react'
 
 
-class WalletTable extends React.Component {
-  handleClick = ({ target: { name } }, id, value) => {
-    const { dispatch } = this.props;
+function WalletTable() {
+  const dispatch = useDispatch()
+  const {expenses} = useSelector(({wallet}) => wallet)
+
+  const handleClick = ({ target: { name } }, id, value) => {
     return name === 'delete'
       ? dispatch({ type: REMOVE_EXPENSE, payload: { id, value } })
           + dispatch({ type: RELOAD_VALUES })
@@ -32,8 +33,6 @@ class WalletTable extends React.Component {
           + dispatch({ type: RELOAD_VALUES });
   };
 
-  render() {
-    const { expenses } = this.props;
     return (
       <TableContainer className='table'>
       <Table variant='simple' >
@@ -75,7 +74,7 @@ class WalletTable extends React.Component {
                       data-testid="edit-btn"
                       type="button"
                       name="edit"
-                      onClick={ (e) => this.handleClick(e, expense.id) }
+                      onClick={ (e) => handleClick(e, expense.id) }
                     >
                       Editar
                     </Button>
@@ -85,7 +84,7 @@ class WalletTable extends React.Component {
                       type="button"
                       name="delete"
                       onClick={
-                        (e) => this.handleClick(e, expense.id, +expense.value * ask)
+                        (e) => handleClick(e, expense.id, +expense.value * ask)
                       }
                     />
                     </Stack>
@@ -98,13 +97,5 @@ class WalletTable extends React.Component {
     </TableContainer>
     );
   }
-}
 
-WalletTable.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-  expenses: PropTypes.arrayOf(PropTypes.any).isRequired,
-};
-
-const mapStateToProps = ({ wallet }) => wallet;
-
-export default connect(mapStateToProps)(WalletTable);
+export default WalletTable;
