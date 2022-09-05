@@ -7,6 +7,21 @@ import {
   REMOVE_EXPENSE,
 } from '../helpers/constants';
 
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer,
+  Button,
+  CloseButton,
+  Stack,
+} from '@chakra-ui/react'
+
+
 class WalletTable extends React.Component {
   handleClick = ({ target: { name } }, id, value) => {
     const { dispatch } = this.props;
@@ -20,61 +35,67 @@ class WalletTable extends React.Component {
   render() {
     const { expenses } = this.props;
     return (
-        <table className='table'>
-          <thead>
-            <tr>
-              <th>Descrição</th>
-              <th>Tag</th>
-              <th>Método de pagamento</th>
-              <th>Valor</th>
-              <th>Moeda</th>
-              <th>Câmbio utilizado</th>
-              <th>Valor convertido</th>
-              <th>Moeda de conversão</th>
-              <th>Editar/Excluir</th>
-            </tr>
-          </thead>
-          <tbody>
-            {expenses.map((expense) => {
+      <TableContainer className='table'>
+      <Table variant='simple' >
+        <TableCaption>Role para os lados para mais informações</TableCaption>
+        <Thead>
+          <Tr>
+            <Th>Descrição</Th>
+            <Th>Tag</Th>
+            <Th>Método de pagamento</Th>
+            <Th isNumeric>Valor</Th>
+            <Th>Moeda</Th>
+            <Th isNumeric>Câmbio utilizado</Th>
+            <Th isNumeric>Valor convertido</Th>
+            <Th>Moeda de conversão</Th>
+            <Th>Editar/Excluir</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+        {expenses.map((expense) => {
               const { value } = expense;
               const { name, ask } = expense.exchangeRates[expense.currency];
               const sum = +ask * +value;
 
               return (
-                <tr key={ expense.id }>
-                  <td>{expense.description}</td>
-                  <td>{expense.tag}</td>
-                  <td>{expense.method}</td>
-                  <td>{(+value).toFixed(2)}</td>
-                  <td>{name}</td>
-                  <td>{(+ask).toFixed(2)}</td>
-                  <td>{sum.toFixed(2)}</td>
-                  <td>Real</td>
-                  <td>
-                    <button
+                <Tr key={ expense.id }>
+                  <Td>{expense.description}</Td>
+                  <Td>{expense.tag}</Td>
+                  <Td>{expense.method}</Td>
+                  <Td>{(+value).toFixed(2)}</Td>
+                  <Td>{name}</Td>
+                  <Td>{(+ask).toFixed(2)}</Td>
+                  <Td>{sum.toFixed(2)}</Td>
+                  <Td>Real</Td>
+                  <Td>
+                  <Stack direction='row' spacing={2} align='center'>
+                    <Button
+                     colorScheme='teal'
+                      variant='ghost'
                       data-testid="edit-btn"
                       type="button"
                       name="edit"
                       onClick={ (e) => this.handleClick(e, expense.id) }
                     >
                       Editar
-                    </button>
-                    <button
+                    </Button>
+                    <CloseButton
                       data-testid="delete-btn"
+                      color='red'
                       type="button"
                       name="delete"
                       onClick={
                         (e) => this.handleClick(e, expense.id, +expense.value * ask)
                       }
-                    >
-                      Deletar
-                    </button>
-                  </td>
-                </tr>
-              );
+                    />
+                    </Stack>
+                  </Td>
+                </Tr>
+              )
             })}
-          </tbody>
-        </table>
+        </Tbody>
+      </Table>
+    </TableContainer>
     );
   }
 }

@@ -36,7 +36,6 @@ function WalletForm() {
   const dispatch = useDispatch();
 
   const {currencies} = useSelector(({ wallet }) => wallet);
-  console.log(currencies);
 
   useEffect(() => {
     const getCurrencies = async () => {
