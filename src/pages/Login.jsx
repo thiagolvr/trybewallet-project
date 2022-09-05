@@ -3,8 +3,23 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { GET_EMAIL_USER } from '../helpers/constants';
 import formValidator from '../helpers/formValidator';
+import { ColorModeSwitcher } from '../ColorModeSwitcher';
 
-function Login() {
+import {
+  Flex,
+  Box,
+  FormControl,
+  Input,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  InputLeftAddon,
+  InputGroup,
+} from '@chakra-ui/react';
+
+export default function Login2() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -12,13 +27,10 @@ function Login() {
   const dispatch = useDispatch();
   const { push } = useHistory();
 
-  const handleChange = ({ target: { id, value } }) => (
-    id === 'inputEmail'
-      ? setEmail(value)
-      : setPassword(value)
-  );
+  const handleChange = ({ target: { id, value } }) =>
+    id === 'email' ? setEmail(value) : setPassword(value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     dispatch({ type: GET_EMAIL_USER, payload: email });
@@ -31,42 +43,73 @@ function Login() {
   }, [email, password]);
 
   return (
-    <form className="form-login" onSubmit={ handleSubmit }>
-
-      <label htmlFor="inputEmail">
-        Email:
-        {' '}
-        <input
-          data-testid="email-input"
-          type="text"
-          id="inputEmail"
-          value={ email }
-          onChange={ handleChange }
-        />
-      </label>
-
-      <label htmlFor="inputPassword">
-        Senha:
-        {' '}
-        <input
-          data-testid="password-input"
-          type="inputPassword"
-          id="inputPassword"
-          value={ password }
-          onChange={ handleChange }
-        />
-      </label>
-
-      <button
-        className="form-login-button"
-        type="submit"
-        disabled={ isDisabled }
-      >
-        Entrar
-      </button>
-
-    </form>
+    <Flex
+      minH={'100vh'}
+      align={'center'}
+      justify={'center'}
+      bg={useColorModeValue('gray.50', 'gray.800')}
+    >
+      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <ColorModeSwitcher></ColorModeSwitcher>
+        <Stack align={'center'}>
+          <Heading fontSize={'4xl'}>TrybeWallet</Heading>
+          <Text fontSize={'lg'} color={'gray.600'}>
+            The control is in your hands
+          </Text>
+        </Stack>
+        <Box
+          rounded={'lg'}
+          bg={useColorModeValue('white', 'gray.700')}
+          boxShadow={'lg'}
+          p={8}
+        >
+          <Stack spacing={4}>
+            <FormControl id="email">
+              <InputGroup>
+                <InputLeftAddon children="Email" />
+                <Input
+                  type="text"
+                  id="email"
+                  placeholder="user@example.com"
+                  value={email}
+                  onChange={handleChange}
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl id="password">
+              <InputGroup>
+                <InputLeftAddon children="Password" />
+                <Input
+                  type="password"
+                  placeholder="******"
+                  id="password"
+                  value={password}
+                  onChange={handleChange}
+                />
+              </InputGroup>
+            </FormControl>
+            <Stack spacing={10}>
+              <Stack
+                direction={{ base: 'column', sm: 'row' }}
+                align={'start'}
+                justify={'space-between'}
+              ></Stack>
+              <Button
+                bg={'blue.400'}
+                color={'white'}
+                _hover={{
+                  bg: 'blue.600',
+                }}
+                type="button"
+                disabled={isDisabled}
+                onClick={handleSubmit}
+              >
+                Get In
+              </Button>
+            </Stack>
+          </Stack>
+        </Box>
+      </Stack>
+    </Flex>
   );
 }
-
-export default Login;
