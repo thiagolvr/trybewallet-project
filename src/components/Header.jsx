@@ -1,13 +1,11 @@
-import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React  from 'react';
+import {useSelector } from 'react-redux';
 
-class Header extends Component {
-  render() {
-    const {
-      user: { email },
-      wallet: { totalAmountOfExpenses },
-    } = this.props;
+function Header()  {
+  const {
+    user: {email}, 
+    wallet: { totalAmountOfExpenses }
+  } = useSelector(({user, wallet}) => ({user, wallet}));
 
     return (
       <div className="header-info">
@@ -17,13 +15,7 @@ class Header extends Component {
       </div>
     );
   }
-}
 
-Header.propTypes = {
-  user: PropTypes.objectOf(PropTypes.any).isRequired,
-  wallet: PropTypes.objectOf(PropTypes.any).isRequired,
-};
 
-const mapStateToProps = ({ user, wallet }) => ({ user, wallet });
 
-export default connect(mapStateToProps)(Header);
+export default Header;
