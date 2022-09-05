@@ -20,8 +20,7 @@ class WalletTable extends React.Component {
   render() {
     const { expenses } = this.props;
     return (
-      <div>
-        <table>
+        <table className='table'>
           <thead>
             <tr>
               <th>Descrição</th>
@@ -76,7 +75,6 @@ class WalletTable extends React.Component {
             })}
           </tbody>
         </table>
-      </div>
     );
   }
 }

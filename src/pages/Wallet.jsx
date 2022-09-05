@@ -11,7 +11,7 @@ class Wallet extends React.Component {
     const { editor } = this.props;
 
     return (
-      <div>
+      <div className='father'>
         <Header />
         {
           editor ? <EditWalletForm /> : <WalletForm />

@@ -1,34 +1,13 @@
-.form-login {
-  align-items: center;
-  border: 1px solid white;
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: 2em;
-}
-
-body .form-login {
-  display: flex;
-  height: 10em;
-  justify-content: center;
-  margin: 15em auto;
-  width: 15em;
-}
-
-.header-info , .wallet-form {
+.header-info , .wallet-form, .table {
   display: flex;
   justify-content: space-around;
-  width: auto;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
-.form-login input {
-  margin-top: 2em;
+
+.wallet-form, .table {
+  margin-top: 50px;
 }
 
-.form-login-button {
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  margin-top: 2.3em;
-}

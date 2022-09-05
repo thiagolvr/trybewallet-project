@@ -8,6 +8,25 @@ import {
   RELOAD_VALUES,
 } from '../helpers/constants';
 
+import {
+  Flex,
+  Box,
+  FormControl,
+  Input,
+  Stack,
+  Button,
+  ButtonGroup,
+  Heading,
+  Text,
+  useColorModeValue,
+  InputLeftAddon,
+  InputGroup,
+  IconButton,
+  Select,
+} from '@chakra-ui/react';
+
+import { AddIcon } from '@chakra-ui/icons'
+
 class WalletForm extends Component {
   state = {
     value: '',
@@ -27,7 +46,7 @@ class WalletForm extends Component {
     this.setState({ [id]: value });
   };
 
-  handleSubmit = async (e) => {
+  handleSubmit = async e => {
     e.preventDefault();
 
     const currencyQuotes = await currencyAPIComplete();
@@ -45,79 +64,90 @@ class WalletForm extends Component {
     const { value, description, currency, method, tag } = this.state;
 
     return (
-      <form className="wallet-form" onSubmit={ this.handleSubmit }>
-        <label htmlFor="value">
-          Digite um valor:
-          {' '}
-          <input
+      <form className="wallet-form" onSubmit={this.handleSubmit}>
+        <FormControl>
+          <Input
             data-testid="value-input"
             type="number"
             id="value"
-            value={ value }
-            onChange={ this.handleChange }
+            placeholder="Digite um valor"
+            value={value}
+            onChange={this.handleChange}
           />
-        </label>
+        </FormControl>
 
-        <label htmlFor="description">
-          Digite uma descrição:
-          {' '}
-          <input
+        <FormControl>
+          <Input
             data-testid="description-input"
             type="text"
             id="description"
-            value={ description }
-            onChange={ this.handleChange }
+            placeholder="Digite um descrição"
+            value={description}
+            onChange={this.handleChange}
           />
-        </label>
+        </FormControl>
 
-        <label htmlFor="currency">
-          Selecione uma moeda:
-          {' '}
-          <select
-            data-testid="currency-input"
-            id="currency"
-            value={ currency }
-            onChange={ this.handleChange }
-          >
-            {currencies.map((currencyName, index) => (
-              <option key={ index }>{currencyName}</option>
-            ))}
-          </select>
-        </label>
+        <FormControl>
+          <Stack spacing={3}>
+            <Select
+              size="md"
+              data-testid="currency-input"
+              id="currency"
+              value={currency}
+              onChange={this.handleChange}
+            >
+              {currencies.map((currencyName, index) => (
+                <option key={index}>{currencyName}</option>
+              ))}
+            </Select>
+          </Stack>
+        </FormControl>
 
-        <label htmlFor="method">
-          Forma de pagamento:
-          {' '}
-          <select
-            data-testid="method-input"
-            id="method"
-            value={ method }
-            onChange={ this.handleChange }
-          >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-          </select>
-        </label>
+        <FormControl>
+          <Stack spacing={3}>
+            <Select
+              size="md"
+              data-testid="method-input"
+              id="method"
+              value={method}
+              onChange={this.handleChange}
+              placeholder="Forma de pagamento"
+            >
+              <option>Dinheiro</option>
+              <option>Cartão de crédito</option>
+              <option>Cartão de débito</option>
+            </Select>
+          </Stack>
+        </FormControl>
 
-        <label htmlFor="tag">
-          Tag:
-          {' '}
-          <select
-            data-testid="tag-input"
-            id="tag"
-            value={ tag }
-            onChange={ this.handleChange }
-          >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
-          </select>
-        </label>
+        <FormControl>
+          <Stack spacing={3}>
+            <Select
+              size="md"
+              data-testid="tag-input"
+              id="tag"
+              value={tag}
+              onChange={this.handleChange}
+              placeholder="Tag"
+            >
+              <option>Alimentação</option>
+              <option>Lazer</option>
+              <option>Trabalho</option>
+              <option>Transporte</option>
+              <option>Saúde</option>
+            </Select>
+          </Stack>
+        </FormControl>
 
-        <button type="submit">Adicionar despesa</button>
+        <ButtonGroup size="sm" isAttached variant="outline">
+          <IconButton 
+            aria-label="Add expense"
+           icon={<AddIcon />}
+           size='md' 
+           type='submit'
+           />
+        </ButtonGroup>
+
       </form>
     );
   }
