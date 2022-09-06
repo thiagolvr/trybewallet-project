@@ -6,11 +6,7 @@ import {
   FormControl,
   Input,
   Stack,
-  ButtonGroup,
-  Heading,
-  Highlight,
   Select,
-  IconButton,
 } from '@chakra-ui/react';
 
 function FiltersForm() {
@@ -47,7 +43,7 @@ function FiltersForm() {
           />
         </FormControl>
 
-        <FormControl>
+        {/* <FormControl>
           <Stack spacing={3}>
             <Select
               size="md"
@@ -61,9 +57,9 @@ function FiltersForm() {
               ))}
             </Select>
           </Stack>
-        </FormControl>
+        </FormControl> */}
 
-        <FormControl>
+        {/* <FormControl>
           <Stack spacing={3}>
             <Select
               size="md"
@@ -77,9 +73,9 @@ function FiltersForm() {
               <option>Cartão de débito</option>
             </Select>
           </Stack>
-        </FormControl>
+        </FormControl> */}
 
-        <FormControl>
+        {/* <FormControl>
           <Input
             data-testid="tag-search-input"
             type="text"
@@ -89,7 +85,7 @@ function FiltersForm() {
             onChange={({target: {value}}) => setFilters({...filters, tag: value})}
           />
         </FormControl>
-
+ */}
 
 
        

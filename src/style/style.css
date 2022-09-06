@@ -8,10 +8,29 @@
 
 .header-info {
   margin-top: 20px;
+  width: 100%;
+  max-width: 80%;
 }
 
 .wallet-form, .table {
   margin-top: 80px;
+}
+
+@media screen and (max-width: 960px) {
+  .wallet-form {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .header-currency {
+    display: none;
+  }
+  .heading-form {
+    flex-direction: column;
+  }
+
+ 
 }
 
 .table {
@@ -31,4 +50,23 @@
   margin: 0 auto;
   width: 100%;
   max-width: 20%;
+}
+
+@media screen and (max-width: 1200px){
+  .filters-form {
+    max-width: 30%;
+  }
+}
+
+@media screen and (max-width: 960px) {
+  .filters-form {
+    max-width: 40%;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .filters-form {
+    max-width: 60%;
+  }
 }
