@@ -1,5 +1,5 @@
-import { Button} from '@chakra-ui/react';
-import React from 'react';
+import { Button, Switch, FormControl, FormLabel} from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import EditWalletForm from '../components/EditWalletForm';
 import Header from '../components/Header';
@@ -9,8 +9,13 @@ import { useHistory } from 'react-router-dom';
 import FiltersForm from '../components/FiltersForm';
 
 function Wallet() {
-    const history = useHistory()
-    const {editor} = useSelector(({wallet}) => wallet)
+  const [enableFilter, setEnableFilter] = useState(false)
+
+  const {editor} = useSelector(({wallet}) => wallet)
+
+  const history = useHistory()
+
+
     return (
       <>
       <div className='father'>
@@ -19,7 +24,16 @@ function Wallet() {
           editor ? <EditWalletForm /> : <WalletForm />
         }
 
-        <FiltersForm />
+        <FormControl display='flex' alignItems='center' justifyContent='center' mt='60px'>
+          <FormLabel htmlFor='show-filters' mb='0'>
+            Habilitar pequisa por filtros
+          </FormLabel>
+          <Switch id='show-filters' onChange={() => setEnableFilter(!enableFilter)}/>
+        </FormControl>
+       
+        {
+          !enableFilter && <FiltersForm />
+        }
 
         <WalletTable />
       </div>

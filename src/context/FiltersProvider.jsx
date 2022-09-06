@@ -4,14 +4,11 @@ import FiltersContext from './FiltersContext';
 
 const FiltersProvider = ({ children }) => {
   const [filteredExpensesInfo, setFilteredExpensesInfo] = useState([]);
-  const [filterByName, setFilterByName] = useState({ name: '' });
-  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
+  const [filters, setFilters] = useState({ description: '', method: '', tag: '', value: ''});
 
   const contextValue = {
-    filterByName,
-    setFilterByName,
-    filterByNumericValues,
-    setFilterByNumericValues,
+    filters,
+    setFilters,
     filteredExpensesInfo,
     setFilteredExpensesInfo,
   };
