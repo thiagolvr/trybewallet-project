@@ -1,5 +1,5 @@
 import { Button, Switch, FormControl, FormLabel} from '@chakra-ui/react';
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import { useSelector } from 'react-redux';
 import EditWalletForm from '../components/EditWalletForm';
 import Header from '../components/Header';
@@ -7,9 +7,10 @@ import WalletForm from '../components/WalletForm';
 import WalletTable from '../components/WalletTable';
 import { useHistory } from 'react-router-dom';
 import FiltersForm from '../components/FiltersForm';
+import FiltersContext from '../context/FiltersContext';
 
 function Wallet() {
-  const [ enableFilter, setEnableFilter ] = useState(true)
+  const { enableFilter, setEnableFilter } = useContext(FiltersContext)
 
   const { editor } = useSelector(({wallet}) => wallet)
 
@@ -31,9 +32,7 @@ function Wallet() {
           <Switch id='show-filters' onChange={() => setEnableFilter(!enableFilter)}/>
         </FormControl>
        
-        {
-          !enableFilter && <FiltersForm />
-        }
+        <FiltersForm />
 
         <WalletTable />
       </div>

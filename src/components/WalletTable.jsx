@@ -39,7 +39,7 @@ function WalletTable() {
   return (
     <TableContainer className="table" whiteSpace='wrap'>
       <Table variant="simple">
-        <TableCaption>Role para os lados para mais informações</TableCaption>
+        <TableCaption className='caption'>Role para os lados dentro da tabela para mais informações</TableCaption>
         <Thead>
           <Tr>
             <Th>Descrição</Th>

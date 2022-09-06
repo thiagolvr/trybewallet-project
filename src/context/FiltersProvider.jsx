@@ -6,6 +6,7 @@ const FiltersProvider = ({ children }) => {
   const [filteredExpensesInfo, setFilteredExpensesInfo] = useState([]);
   const [filters, setFilters] = useState({ description: '', method: '', tag: '', value: ''});
   const [currenciesFilter, setCurrenciesFilter] = useState([]);
+  const [enableFilter, setEnableFilter] = useState(true);
 
   const contextValue = {
     filters,
@@ -14,6 +15,8 @@ const FiltersProvider = ({ children }) => {
     setFilteredExpensesInfo,
     currenciesFilter,
     setCurrenciesFilter,
+    enableFilter,
+    setEnableFilter
   };
 
   return (
