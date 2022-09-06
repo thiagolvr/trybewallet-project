@@ -9,9 +9,9 @@ import { useHistory } from 'react-router-dom';
 import FiltersForm from '../components/FiltersForm';
 
 function Wallet() {
-  const [enableFilter, setEnableFilter] = useState(false)
+  const [ enableFilter, setEnableFilter ] = useState(true)
 
-  const {editor} = useSelector(({wallet}) => wallet)
+  const { editor } = useSelector(({wallet}) => wallet)
 
   const history = useHistory()
 
@@ -24,9 +24,9 @@ function Wallet() {
           editor ? <EditWalletForm /> : <WalletForm />
         }
 
-        <FormControl display='flex' alignItems='center' justifyContent='center' mt='60px'>
+        <FormControl display='flex' alignItems='center' justifyContent='center' mt='60px' mb='20px'>
           <FormLabel htmlFor='show-filters' mb='0'>
-            Habilitar pequisa por filtros
+            Habilitar pequisa por filtro
           </FormLabel>
           <Switch id='show-filters' onChange={() => setEnableFilter(!enableFilter)}/>
         </FormControl>

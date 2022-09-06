@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { currencyAPI, currencyAPIComplete } from '../services/currencyAPI';
+import FiltersContext from '../context/FiltersContext';
+
 import {
   GET_CURRENCIES,
   GET_EXPENSES,
@@ -30,6 +32,7 @@ function WalletForm() {
   const dispatch = useDispatch();
 
   const {currencies} = useSelector(({ wallet }) => wallet);
+  const { setCurrenciesFilter } = useContext(FiltersContext)
 
   useEffect(() => {
     const getCurrencies = async () => {
@@ -37,6 +40,8 @@ function WalletForm() {
       dispatch({ type: GET_CURRENCIES, payload: currs })
     }
     getCurrencies();
+
+    setCurrenciesFilter(currencies)
   }, []);
 
   const handleChange = ({ target: { id, value } }) => {
@@ -104,7 +109,7 @@ function WalletForm() {
             data-testid="value-input"
             type="number"
             id="value"
-            placeholder="Digite um valor"
+            placeholder="Adicione um valor"
             value={value}
             onChange={handleChange}
           />
@@ -115,7 +120,7 @@ function WalletForm() {
             data-testid="description-input"
             type="text"
             id="description"
-            placeholder="Digite uma descrição"
+            placeholder="Adicione uma descrição"
             value={description}
             onChange={handleChange}
           />

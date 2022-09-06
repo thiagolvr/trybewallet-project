@@ -5,12 +5,15 @@ import FiltersContext from './FiltersContext';
 const FiltersProvider = ({ children }) => {
   const [filteredExpensesInfo, setFilteredExpensesInfo] = useState([]);
   const [filters, setFilters] = useState({ description: '', method: '', tag: '', value: ''});
+  const [currenciesFilter, setCurrenciesFilter] = useState([]);
 
   const contextValue = {
     filters,
     setFilters,
     filteredExpensesInfo,
     setFilteredExpensesInfo,
+    currenciesFilter,
+    setCurrenciesFilter,
   };
 
   return (

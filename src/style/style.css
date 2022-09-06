@@ -25,3 +25,10 @@
   margin: 100px 0;
 }
 
+.filters-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 20%;
+}
