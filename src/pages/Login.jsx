@@ -64,7 +64,7 @@ export default function Login() {
         <Stack align={'center'}>
           <Heading fontSize={'4xl'}>TrybeWallet</Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            The control is in your hands
+            O controle está em suas mãos.
           </Text>
         </Stack>
         <Box
@@ -76,7 +76,7 @@ export default function Login() {
           <Stack spacing={4}>
             <FormControl id="email">
               <InputGroup>
-                <InputLeftAddon children="Email" />
+                <InputLeftAddon children="E-mail" />
                 <Input
                   type="text"
                   id="email"
@@ -88,7 +88,7 @@ export default function Login() {
             </FormControl>
             <FormControl id="password">
               <InputGroup>
-                <InputLeftAddon children="Password" />
+                <InputLeftAddon children="Senha" />
                 <Input
                   type="password"
                   placeholder="******"
@@ -114,7 +114,7 @@ export default function Login() {
                 disabled={isDisabled}
                 onClick={handleSubmit}
               >
-                Get In
+                Entrar
               </Button>
             </Stack>
           </Stack>
