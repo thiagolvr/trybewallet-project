@@ -6,6 +6,7 @@ import Header from '../components/Header';
 import WalletForm from '../components/WalletForm';
 import WalletTable from '../components/WalletTable';
 import { useHistory } from 'react-router-dom';
+import FiltersForm from '../components/FiltersForm';
 
 function Wallet() {
     const history = useHistory()
@@ -17,6 +18,9 @@ function Wallet() {
         {
           editor ? <EditWalletForm /> : <WalletForm />
         }
+
+        <FiltersForm />
+
         <WalletTable />
       </div>
 

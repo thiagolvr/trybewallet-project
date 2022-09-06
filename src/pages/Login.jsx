@@ -20,7 +20,7 @@ import {
   InputGroup,
 } from '@chakra-ui/react';
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
@@ -123,3 +123,5 @@ export default function Login() {
     </Flex>
   );
 }
+
+export default Login

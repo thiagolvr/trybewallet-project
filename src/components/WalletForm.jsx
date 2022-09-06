@@ -89,99 +89,97 @@ function WalletForm() {
 
   return (
     <>
-    <Heading lineHeight='tall' as='h5' size='sm' className="heading-form">
-    <Highlight
-    query={['Preencha', 'adicionar']}
-    styles={{ px: '2', py: '1', rounded: 'full', bg: 'teal.100' }}
-  >
-    Preencha o formulário abaixo para adicionar uma despesa.
-  </Highlight>
-</Heading>
+      <Heading lineHeight="tall" as="h5" size="sm" className="heading-form">
+        <Highlight
+          query={['Preencha', 'adicionar']}
+          styles={{ px: '2', py: '1', rounded: 'full', bg: 'teal.100' }}
+        >
+          Preencha o formulário abaixo para adicionar uma despesa.
+        </Highlight>
+      </Heading>
 
-    <form className="wallet-form" onSubmit={handleSubmit}>
-      <FormControl>
-        <Input
-          data-testid="value-input"
-          type="number"
-          id="value"
-          placeholder="Digite um valor"
-          value={value}
-          onChange={handleChange}
-        />
-      </FormControl>
-
-      <FormControl>
-        <Input
-          data-testid="description-input"
-          type="text"
-          id="description"
-          placeholder="Digite uma descrição"
-          value={description}
-          onChange={handleChange}
-        />
-      </FormControl>
-
-      <FormControl>
-        <Stack spacing={3}>
-          <Select
-            size="md"
-            data-testid="currency-input"
-            id="currency"
-            value={currency}
+      <form className="wallet-form" onSubmit={handleSubmit}>
+        <FormControl>
+          <Input
+            data-testid="value-input"
+            type="number"
+            id="value"
+            placeholder="Digite um valor"
+            value={value}
             onChange={handleChange}
-          >
-            {
-            currencies.map((currencyName, index) => (
-              <option key={index}>{currencyName}</option>
-            ))
-            }
-          </Select>
-        </Stack>
-      </FormControl>
+          />
+        </FormControl>
 
-      <FormControl>
-        <Stack spacing={3}>
-          <Select
-            size="md"
-            data-testid="method-input"
-            id="method"
-            value={method}
+        <FormControl>
+          <Input
+            data-testid="description-input"
+            type="text"
+            id="description"
+            placeholder="Digite uma descrição"
+            value={description}
             onChange={handleChange}
-          >
-            <option>Dinheiro</option>
-            <option>Cartão de crédito</option>
-            <option>Cartão de débito</option>
-          </Select>
-        </Stack>
-      </FormControl>
+          />
+        </FormControl>
 
-      <FormControl>
-        <Stack spacing={3}>
-          <Select
+        <FormControl>
+          <Stack spacing={3}>
+            <Select
+              size="md"
+              data-testid="currency-input"
+              id="currency"
+              value={currency}
+              onChange={handleChange}
+            >
+              {currencies.map((currencyName, index) => (
+                <option key={index}>{currencyName}</option>
+              ))}
+            </Select>
+          </Stack>
+        </FormControl>
+
+        <FormControl>
+          <Stack spacing={3}>
+            <Select
+              size="md"
+              data-testid="method-input"
+              id="method"
+              value={method}
+              onChange={handleChange}
+            >
+              <option>Dinheiro</option>
+              <option>Cartão de crédito</option>
+              <option>Cartão de débito</option>
+            </Select>
+          </Stack>
+        </FormControl>
+
+        <FormControl>
+          <Stack spacing={3}>
+            <Select
+              size="md"
+              data-testid="tag-input"
+              id="tag"
+              value={tag}
+              onChange={handleChange}
+            >
+              <option>Alimentação</option>
+              <option>Lazer</option>
+              <option>Trabalho</option>
+              <option>Transporte</option>
+              <option>Saúde</option>
+            </Select>
+          </Stack>
+        </FormControl>
+
+        <ButtonGroup size="sm" isAttached variant="outline">
+          <IconButton
+            aria-label="Add expense"
+            icon={<AddIcon />}
             size="md"
-            data-testid="tag-input"
-            id="tag"
-            value={tag}
-            onChange={handleChange}
-          >
-            <option>Alimentação</option>
-            <option>Lazer</option>
-            <option>Trabalho</option>
-            <option>Transporte</option>
-            <option>Saúde</option>
-          </Select>
-        </Stack>
-      </FormControl>
-
-      <ButtonGroup size="sm" isAttached variant="outline">
-        <IconButton
-          aria-label="Add expense"
-          icon={<AddIcon />}
-          size="md"
-          type="submit"
-        />
-      </ButtonGroup>
-    </form>
+            type="submit"
+          />
+        </ButtonGroup>
+      </form>
     </>
   );
 }

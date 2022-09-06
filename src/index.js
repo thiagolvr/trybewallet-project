@@ -7,19 +7,22 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import Routes from './routes/Routes';
 import store from './redux/store';
+import FiltersProvider from './context/FiltersProvider';
 
 const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container);
 
 root.render(
-    <BrowserRouter>
-      <Provider store={store}>
-        <ColorModeScript />
-        <ChakraProvider theme={theme}>
+  <BrowserRouter>
+    <Provider store={store}>
+      <ColorModeScript />
+      <ChakraProvider theme={theme}>
+        <FiltersProvider>
           <Routes />
-        </ChakraProvider>
-      </Provider>
-    </BrowserRouter>
+        </FiltersProvider>
+      </ChakraProvider>
+    </Provider>
+  </BrowserRouter>
 );
 
 // If you want your app to work offline and load faster, you can change
