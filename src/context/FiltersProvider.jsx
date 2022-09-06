@@ -4,6 +4,7 @@ import FiltersContext from './FiltersContext';
 
 const FiltersProvider = ({ children }) => {
   const [filteredExpensesInfo, setFilteredExpensesInfo] = useState([]);
+  const [filterByDescription, setFilterByDescription] = useState('');
   const [filters, setFilters] = useState({ description: '', method: '', tag: '', value: ''});
   const [currenciesFilter, setCurrenciesFilter] = useState([]);
   const [enableFilter, setEnableFilter] = useState(true);
@@ -12,6 +13,8 @@ const FiltersProvider = ({ children }) => {
     filters,
     setFilters,
     filteredExpensesInfo,
+    filterByDescription,
+    setFilterByDescription,
     setFilteredExpensesInfo,
     currenciesFilter,
     setCurrenciesFilter,

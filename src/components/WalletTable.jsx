@@ -37,18 +37,20 @@ function WalletTable() {
   };
 
   return (
-    <TableContainer className="table" whiteSpace='wrap'>
+    <TableContainer className="table" whiteSpace="wrap">
       <Table variant="simple">
-        <TableCaption className='caption'>Role para os lados dentro da tabela para mais informações</TableCaption>
+        <TableCaption className="caption">
+          Role para os lados dentro da tabela para mais informações
+        </TableCaption>
         <Thead>
           <Tr>
             <Th>Descrição</Th>
             <Th>Tag</Th>
             <Th>Método de pagamento</Th>
             <Th isNumeric>Valor</Th>
-            <Th >Moeda</Th>
+            <Th>Moeda</Th>
             <Th isNumeric>Câmbio</Th>
-            <Th isNumeric >Valor convertido</Th>
+            <Th isNumeric>Valor convertido</Th>
             <Th>Moeda de conversão</Th>
             <Th>Editar/Excluir</Th>
           </Tr>

@@ -32,7 +32,6 @@ function WalletForm() {
   const dispatch = useDispatch();
 
   const {currencies} = useSelector(({ wallet }) => wallet);
-  const { setCurrenciesFilter } = useContext(FiltersContext)
 
   useEffect(() => {
     const getCurrencies = async () => {
@@ -40,8 +39,6 @@ function WalletForm() {
       dispatch({ type: GET_CURRENCIES, payload: currs })
     }
     getCurrencies();
-
-    setCurrenciesFilter(currencies)
   }, []);
 
   const handleChange = ({ target: { id, value } }) => {
