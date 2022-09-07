@@ -25,7 +25,7 @@ import { AddIcon } from '@chakra-ui/icons';
 function WalletForm() {
   const [value, setValue] = useState('');
   const [currency, setCurrency] = useState('USD');
-  const [method, setMethod] = useState('Cartão de crédito');
+  const [method, setMethod] = useState('Dinheiro');
   const [tag, setTag] = useState('Alimentação');
   const [description, setDescription] = useState('');
 

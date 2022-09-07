@@ -3,7 +3,8 @@ import { useSelector } from 'react-redux';
 import FiltersContext from '../context/FiltersContext';
 import ModalMoreFilters from './ModalMoreFilters';
 
-import { FormControl, Input, Stack } from '@chakra-ui/react';
+import { FormControl, Input, Stack, Button } from '@chakra-ui/react';
+import { DeleteIcon } from '@chakra-ui/icons';
 
 function FiltersForm() {
   const { expenses } = useSelector(({ wallet }) => wallet);
@@ -12,15 +13,28 @@ function FiltersForm() {
     filterByDescription,
     setFilterByDescription,
     enableFilter,
+    filters,
+    setFilters
   } = useContext(FiltersContext);
 
   useEffect(() => {
-    setFilteredExpensesInfo(
-      expenses.filter(({ description }) =>
-        description.toLowerCase().includes(filterByDescription.toLowerCase())
+    const expensesFilteredByDescription =  expenses.filter(({ description }) =>
+    description.toLowerCase().includes(filterByDescription.toLowerCase())
+        )
+
+    const expensesWithActiveFilters = filters
+    .reduce((acc, filter) => acc
+      .filter((expense) =>  (
+        +expense.value >= +filter.value 
+        && expense.currency === filter.currency 
+        && expense.method === filter.method 
+        && expense.tag === filter.tag 
       )
-    );
-  }, [expenses, filterByDescription]);
+      ), expensesFilteredByDescription);
+   
+
+    setFilteredExpensesInfo(expensesWithActiveFilters);
+  }, [expenses, filterByDescription, setFilteredExpensesInfo, filters ]);
 
   return (
     <>
@@ -39,7 +53,21 @@ function FiltersForm() {
             />
           </FormControl>
 
-          <ModalMoreFilters className="modal" />
+              {
+                filters.length
+                  ? (
+                    <Button 
+                    leftIcon={<DeleteIcon />} 
+                    colorScheme='red' 
+                    variant='solid'
+                    onClick={() => setFilters([])}
+                    >
+                      Apagar filtros ativos
+                    </Button>
+                  )
+                  : <ModalMoreFilters className="modal" />
+              }
+
         </Stack>
       )}
     </>

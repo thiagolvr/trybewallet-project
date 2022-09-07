@@ -1,4 +1,4 @@
-import React, {useRef, useContext, useEffect, useState} from 'react';
+import React, { useRef, useContext, useEffect, useState } from 'react';
 import FiltersContext from '../context/FiltersContext';
 import { currencyAPI } from '../services/currencyAPI';
 
@@ -21,8 +21,20 @@ import {
 
 export default function ModalMoreFilters() {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { currenciesFilter, setCurrenciesFilter, filters, setFilters } = useContext(FiltersContext)
-  const [appliedFilters, setAppliedFilters] = useState({ method: 'Cartão de crédito', tag: 'Alimentação', value: '', currency: 'USD'})
+  const { currenciesFilter, setCurrenciesFilter, setFilters } =
+    useContext(FiltersContext);
+
+    const [value, setValue ] = useState('0')
+    const [method, setMethod ] = useState('Dinheiro')
+    const [currency, setCurrency ] = useState('USD')
+    const [tag, setTag ] = useState('Alimentação')
+
+    const appliedFilters = [{
+      value, 
+      method,
+      currency,
+      tag,
+    }]
 
   const initialRef = useRef(null);
   const finalRef = useRef(null);
@@ -30,20 +42,15 @@ export default function ModalMoreFilters() {
   useEffect(() => {
     const getCurrencies = async () => {
       const currencies = await currencyAPI();
-      setCurrenciesFilter(currencies)
-    }
+      setCurrenciesFilter(currencies);
+    };
     getCurrencies();
   }, []);
 
-  useEffect(() => {
-    console.log(filters)
-
-  }, [filters])
-
   const handleApplyFilters = () => {
-    setFilters(appliedFilters)  
-    onClose()
-  }
+    setFilters(appliedFilters);
+    onClose();
+  };
 
   return (
     <>
@@ -62,11 +69,14 @@ export default function ModalMoreFilters() {
           <ModalBody pb={6}>
             <FormControl>
               <FormLabel>Valor</FormLabel>
-              <Input 
-              ref={initialRef}
-              placeholder="Digite um valor"
-              id='filter-value'
-              onChange={({target: {value}}) => setAppliedFilters({...appliedFilters, value})}
+              <Input
+              type='number'
+                ref={initialRef}
+                placeholder="Digite um valor"
+                id="filter-value"
+                onChange={({ target: { value } }) =>
+                  setValue(value)
+                }
               />
             </FormControl>
 
@@ -77,13 +87,13 @@ export default function ModalMoreFilters() {
                   size="md"
                   id="filter-currency"
                   value={appliedFilters.currency}
-                  onChange={({target: {value}}) => setAppliedFilters({...appliedFilters, currency: value})}
+                  onChange={({ target: { value } }) =>
+                    setCurrency(value)
+                  }
                 >
-                  {
-                  currenciesFilter.map((currencyName, index) => (
-                  <option key={index}>{currencyName}</option>
-                ))
-                }
+                  {currenciesFilter.map((currencyName, index) => (
+                    <option key={index}>{currencyName}</option>
+                  ))}
                 </Select>
               </Stack>
             </FormControl>
@@ -95,7 +105,9 @@ export default function ModalMoreFilters() {
                   size="md"
                   id="filter-method"
                   value={appliedFilters.method}
-                  onChange={({target: {value}}) => setAppliedFilters({...appliedFilters, method: value})}
+                  onChange={({ target: { value } }) =>
+                    setMethod(value)
+                  }
                 >
                   <option>Dinheiro</option>
                   <option>Cartão de crédito</option>
@@ -110,7 +122,9 @@ export default function ModalMoreFilters() {
                 size="md"
                 id="filter-tag"
                 value={appliedFilters.tag}
-                onChange={({target: {value}}) => setAppliedFilters({...appliedFilters, tag: value})}
+                onChange={({ target: { value } }) =>
+                  setTag(value)
+                }
               >
                 <option>Alimentação</option>
                 <option>Lazer</option>
@@ -122,7 +136,11 @@ export default function ModalMoreFilters() {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="blue" mr={3} onClick={() => handleApplyFilters() }>
+            <Button
+              colorScheme="blue"
+              mr={3}
+              onClick={() => handleApplyFilters()}
+            >
               Aplicar
             </Button>
             <Button onClick={onClose}>Cancelar</Button>
