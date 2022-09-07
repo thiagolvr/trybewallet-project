@@ -105,8 +105,8 @@ function WalletForm() {
         <Highlight
           query={['Preencha', 'adicionar']}
           styles={{
-            ml: '2',
-            mr: '2',
+            ml: '1',
+            mr: '1',
             px: '2',
             py: '1',
             rounded: 'full',

@@ -44,7 +44,7 @@ function WalletTable() {
     return (
       <TableContainer className='table' whiteSpace='wrap' >
       <Table variant='simple' size='sm'>
-        <TableCaption>Em dispositivos menores, role para os lados dentro da tabela para mais informações</TableCaption>
+        <TableCaption>Em dispositivos menores, role para os lados dentro da tabela para mais informações.</TableCaption>
         <Thead>
           <Tr>
             <Th>Descrição</Th>
@@ -53,8 +53,8 @@ function WalletTable() {
             <Th isNumeric>Valor</Th>
             <Th>Moeda</Th>
             <Th isNumeric>Câmbio</Th>
-            <Th isNumeric>Valor convertido</Th>
             <Th>Moeda de conversão</Th>
+            <Th isNumeric>Valor convertido</Th>
             <Th>Editar/Excluir</Th>
           </Tr>
         </Thead>
@@ -73,8 +73,8 @@ function WalletTable() {
                   <Td>{(+value).toFixed(2)}</Td>
                   <Td>{name}</Td>
                   <Td>{(+ask).toFixed(2)}</Td>
-                  <Td>{sum.toFixed(2)}</Td>
-                  <Td>Real</Td>
+                  <Td>Real Brasileiro</Td>
+                  <Td>{sum.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</Td>
                   <Td>
                   <Stack direction='row' spacing={2} align='center'>
                     <Button
