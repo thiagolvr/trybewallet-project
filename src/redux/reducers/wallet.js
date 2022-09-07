@@ -5,6 +5,7 @@ import {
   RELOAD_VALUES,
   REMOVE_EXPENSE,
   SAVE_EXPENSE,
+  CANCEL
 } from '../../helpers/constants';
 
 const INITIAL_STATE = {
@@ -50,6 +51,12 @@ const wallet = (state = INITIAL_STATE, { type, payload }) => {
         ),
       ],
     };
+
+    case CANCEL: 
+      return {
+        ...state,
+        editor: false
+      }
 
   case RELOAD_VALUES:
     return {

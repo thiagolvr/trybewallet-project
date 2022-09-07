@@ -1,11 +1,12 @@
 import React, { useContext } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import FiltersContext from '../context/FiltersContext';
 
 import {
   EDIT_EXPENSE,
   RELOAD_VALUES,
   REMOVE_EXPENSE,
+  CANCEL,
 } from '../helpers/constants';
 
 import {
@@ -26,21 +27,24 @@ import {
 function WalletTable() {
   const dispatch = useDispatch()
   const {filteredExpensesInfo} = useContext(FiltersContext)
+  const { editor } = useSelector(({wallet}) => wallet)
 
   const handleRemove = (_e, id, value) => {
     dispatch({ type: REMOVE_EXPENSE, payload: { id, value } });
     dispatch({ type: RELOAD_VALUES });
   }
 
-  const handleEdit = (_e, id, value) => {
+  const handleEdit = ({target: {name}}, id, value) => {
+    if (name === 'cancel') return dispatch({ type: CANCEL })
+
     dispatch({ type: EDIT_EXPENSE, payload: { id, value } });
     dispatch({ type: RELOAD_VALUES });
   }
 
     return (
-      <TableContainer className='table' whiteSpace='wrap'>
-      <Table variant='simple'>
-        <TableCaption>Role para os lados dentro da tabela para mais informações</TableCaption>
+      <TableContainer className='table' whiteSpace='wrap' >
+      <Table variant='simple' size='sm'>
+        <TableCaption >Em dispositivos menores, role para os lados dentro da tabela para mais informações</TableCaption>
         <Thead>
           <Tr>
             <Th>Descrição</Th>
@@ -74,14 +78,14 @@ function WalletTable() {
                   <Td>
                   <Stack direction='row' spacing={2} align='center'>
                     <Button
-                     colorScheme='teal'
+                     colorScheme={editor ? 'red' : 'teal'}
                       variant='ghost'
                       data-testid="edit-btn"
                       type="button"
-                      name="edit"
+                      name={editor ? "cancel" : 'edit'}
                       onClick={ (e) => handleEdit(e, expense.id, +expense.value * ask) }
                     >
-                      Editar
+                      { editor ? 'Cancelar' : 'Editar'}
                     </Button>
                     <CloseButton
                       data-testid="delete-btn"

@@ -5,3 +5,4 @@ export const REMOVE_EXPENSE = 'REMOVE_EXPENSE';
 export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 export const RELOAD_VALUES = 'RELOAD_VALUES';
+export const CANCEL = 'CANCEL';
