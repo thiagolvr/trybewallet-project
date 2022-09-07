@@ -94,7 +94,7 @@ function WalletForm() {
       <Heading lineHeight="tall" as="h5" size="sm" className="heading-form">
         <Highlight
           query={['Preencha', 'adicionar']}
-          styles={{ px: '2', py: '1', rounded: 'full', bg: 'teal.100' }}
+          styles={{ ml:'2', mr:'2', px: '2', py: '1', rounded: 'full', bg: 'teal.100' }}
         >
           Preencha o formulário abaixo para adicionar uma despesa.
         </Highlight>
