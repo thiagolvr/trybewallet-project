@@ -45,7 +45,7 @@ function Login() {
       isClosable: true,
     })
 
-    push('/carteira');
+    push('/wallet');
   };
 
   useEffect(() => {

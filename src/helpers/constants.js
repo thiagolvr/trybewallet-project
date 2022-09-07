@@ -6,3 +6,5 @@ export const EDIT_EXPENSE = 'EDIT_EXPENSE';
 export const SAVE_EXPENSE = 'SAVE_EXPENSE';
 export const RELOAD_VALUES = 'RELOAD_VALUES';
 export const CANCEL = 'CANCEL';
+export const GET_NAME_USER = 'GET_NAME_USER';
+export const GET_DESCRIPTION_USER = 'GET_DESCRIPTION_USER';

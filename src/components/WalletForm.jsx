@@ -27,7 +27,11 @@ function WalletForm() {
   const [method, setMethod] = useState('Método de pagamento');
   const [tag, setTag] = useState('Tag');
   const [description, setDescription] = useState('');
-  const [count, setCount] = useState(0);
+  const [control, setControl] = useState({
+    countCurrency: 0,
+    countMethod: 0,
+    countTag: 0,
+  });
 
   const dispatch = useDispatch();
 
@@ -44,39 +48,41 @@ function WalletForm() {
   const handleChange = ({ target: { id, value } }) => {
     switch (id) {
       case 'value':
-        setValue(value);
-        return;
+        return setValue(value);
 
       case 'currency':
         setCurrency(value);
-        setCount(count + 1)
-        return;
+        return (
+          control.countCurrency === 0 &&
+          setControl({ ...control, countCurrency: 1 })
+        );
 
       case 'method':
         setMethod(value);
-        setCount(count + 1)
-        return;
+        return (
+          control.countMethod === 0 &&
+          setControl({ ...control, countMethod: 1 })
+        );
 
       case 'tag':
         setTag(value);
-        setCount(count + 1)
-        return;
+        return (
+          control.countTag === 0 && setControl({ ...control, countTag: 1 })
+        );
 
       case 'description':
-        setDescription(value);
-        return;
+        return setDescription(value);
 
       default:
-        return;
+        return '';
     }
   };
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (count !== 3) return
-   
-  
+    if (!(control.countCurrency && control.countMethod && control.countTag)) return;
+
     const wallet = {
       value,
       currency,
@@ -96,7 +102,9 @@ function WalletForm() {
     setCurrency('Moeda');
     setMethod('Método de pagamento');
     setTag('Tag');
-    setCount(0)
+    setControl({countCurrency: 0,
+      countMethod: 0,
+      countTag: 0});
   };
 
   return (
@@ -194,14 +202,18 @@ function WalletForm() {
         </FormControl>
 
         <ButtonGroup ml={3} size="sm" isAttached variant="outline">
-           <Button 
-           leftIcon={count === 3 ? <CheckCircleIcon /> : <NotAllowedIcon />} 
-           colorScheme={count === 3 ? "teal" : 'red'}
-            variant='solid'
-            type='submit'
-            size='md'
-            >
-            {count === 3 ? 'Adicionar' : 'Não permitido'}
+          <Button
+            leftIcon={
+              control.countCurrency && control.countMethod && control.countTag 
+              ? <CheckCircleIcon /> 
+              : <NotAllowedIcon />
+            }
+            colorScheme={ (control.countCurrency && control.countMethod && control.countTag) ? 'teal' : 'red'}
+            variant="solid"
+            type="submit"
+            size="md"
+          >
+            { (control.countCurrency && control.countMethod && control.countTag)  ? 'Adicionar' : 'Não permitido'}
           </Button>
         </ButtonGroup>
       </form>
