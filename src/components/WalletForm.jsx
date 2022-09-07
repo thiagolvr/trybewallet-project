@@ -16,27 +16,28 @@ import {
   Heading,
   Highlight,
   Select,
-  IconButton,
+  Button,
 } from '@chakra-ui/react';
 
-import { AddIcon } from '@chakra-ui/icons';
+import { CheckCircleIcon, NotAllowedIcon } from '@chakra-ui/icons';
 
 function WalletForm() {
   const [value, setValue] = useState('');
-  const [currency, setCurrency] = useState('Selecione uma moeda');
+  const [currency, setCurrency] = useState('Moeda');
   const [method, setMethod] = useState('Método de pagamento');
-  const [tag, setTag] = useState('Selecione uma Tag');
+  const [tag, setTag] = useState('Tag');
   const [description, setDescription] = useState('');
+  const [count, setCount] = useState(0);
 
   const dispatch = useDispatch();
 
-  const {currencies} = useSelector(({ wallet }) => wallet);
+  const { currencies } = useSelector(({ wallet }) => wallet);
 
   useEffect(() => {
     const getCurrencies = async () => {
       const currs = await currencyAPI();
-      dispatch({ type: GET_CURRENCIES, payload: currs })
-    }
+      dispatch({ type: GET_CURRENCIES, payload: currs });
+    };
     getCurrencies();
   }, []);
 
@@ -48,14 +49,17 @@ function WalletForm() {
 
       case 'currency':
         setCurrency(value);
+        setCount(count + 1)
         return;
 
       case 'method':
         setMethod(value);
+        setCount(count + 1)
         return;
 
       case 'tag':
         setTag(value);
+        setCount(count + 1)
         return;
 
       case 'description':
@@ -70,11 +74,9 @@ function WalletForm() {
   const handleSubmit = async e => {
     e.preventDefault();
 
-    if (currency === 'Selecione uma moeda' 
-          || method === 'Método de pagamento'
-          || tag === 'Selecione uma Tag'
-    ) return;
-
+    if (count !== 3) return
+   
+  
     const wallet = {
       value,
       currency,
@@ -91,6 +93,10 @@ function WalletForm() {
 
     setValue('');
     setDescription('');
+    setCurrency('Moeda');
+    setMethod('Método de pagamento');
+    setTag('Tag');
+    setCount(0)
   };
 
   return (
@@ -98,7 +104,14 @@ function WalletForm() {
       <Heading lineHeight="tall" as="h5" size="sm" className="heading-form">
         <Highlight
           query={['Preencha', 'adicionar']}
-          styles={{ ml:'2', mr:'2', px: '2', py: '1', rounded: 'full', bg: 'teal.100' }}
+          styles={{
+            ml: '2',
+            mr: '2',
+            px: '2',
+            py: '1',
+            rounded: 'full',
+            bg: 'teal.100',
+          }}
         >
           Preencha o formulário abaixo para adicionar uma despesa.
         </Highlight>
@@ -110,7 +123,7 @@ function WalletForm() {
             data-testid="value-input"
             type="number"
             id="value"
-            placeholder="Adicione um valor"
+            placeholder="Valor"
             value={value}
             onChange={handleChange}
           />
@@ -121,7 +134,7 @@ function WalletForm() {
             data-testid="description-input"
             type="text"
             id="description"
-            placeholder="Adicione uma descrição"
+            placeholder="Descrição"
             value={description}
             onChange={handleChange}
           />
@@ -136,7 +149,7 @@ function WalletForm() {
               value={currency}
               onChange={handleChange}
             >
-              <option disabled>Selecione uma moeda</option>
+              <option disabled>Moeda</option>
               {currencies.map((currencyName, index) => (
                 <option key={index}>{currencyName}</option>
               ))}
@@ -170,7 +183,7 @@ function WalletForm() {
               value={tag}
               onChange={handleChange}
             >
-              <option disabled>Selecione uma Tag</option>
+              <option disabled>Tag</option>
               <option>Alimentação</option>
               <option>Lazer</option>
               <option>Trabalho</option>
@@ -180,13 +193,16 @@ function WalletForm() {
           </Stack>
         </FormControl>
 
-        <ButtonGroup size="sm" isAttached variant="outline">
-          <IconButton
-            aria-label="Add expense"
-            icon={<AddIcon />}
-            size="md"
-            type="submit"
-          />
+        <ButtonGroup ml={3} size="sm" isAttached variant="outline">
+           <Button 
+           leftIcon={count === 3 ? <CheckCircleIcon /> : <NotAllowedIcon />} 
+           colorScheme={count === 3 ? "teal" : 'red'}
+            variant='solid'
+            type='submit'
+            size='md'
+            >
+            {count === 3 ? 'Adicionar' : 'Não permitido'}
+          </Button>
         </ButtonGroup>
       </form>
     </>
