@@ -44,7 +44,7 @@ function WalletTable() {
     return (
       <TableContainer className='table' whiteSpace='wrap' >
       <Table variant='simple' size='sm'>
-        <TableCaption >Em dispositivos menores, role para os lados dentro da tabela para mais informações</TableCaption>
+        <TableCaption>Em dispositivos menores, role para os lados dentro da tabela para mais informações</TableCaption>
         <Thead>
           <Tr>
             <Th>Descrição</Th>

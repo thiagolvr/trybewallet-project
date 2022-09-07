@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { currencyAPI, currencyAPIComplete } from '../services/currencyAPI';
-import FiltersContext from '../context/FiltersContext';
 
 import {
   GET_CURRENCIES,
