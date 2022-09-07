@@ -38,7 +38,7 @@ function Wallet() {
       </div>
 
       <div className='logout'>
-        <Button colorScheme='red' onClick={() => history.push('/')}>Sair</Button>
+        <Button colorScheme='red' onClick={() => history.push('/login')}>Sair</Button>
       </div>
       </>
     );
