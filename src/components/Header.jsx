@@ -39,11 +39,9 @@ function Header() {
           </Heading>
         )}
         <h4 data-testid="total-field">
-          Total de gastos: <strong>{totalAmountOfExpenses.toFixed(2)}</strong>
+          Total de gastos: <strong>{totalAmountOfExpenses.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</strong>
         </h4>
-        <h4 data-testid="header-currency-field" className='header-currency'>
-          Moeda Base: <strong>BRL</strong>
-        </h4>
+       
         <ColorModeSwitcher></ColorModeSwitcher>
       </div>
 

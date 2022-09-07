@@ -23,9 +23,9 @@ import { AddIcon } from '@chakra-ui/icons';
 
 function WalletForm() {
   const [value, setValue] = useState('');
-  const [currency, setCurrency] = useState('USD');
-  const [method, setMethod] = useState('Dinheiro');
-  const [tag, setTag] = useState('Alimentação');
+  const [currency, setCurrency] = useState('Selecione uma moeda');
+  const [method, setMethod] = useState('Método de pagamento');
+  const [tag, setTag] = useState('Selecione uma Tag');
   const [description, setDescription] = useState('');
 
   const dispatch = useDispatch();
@@ -69,6 +69,11 @@ function WalletForm() {
 
   const handleSubmit = async e => {
     e.preventDefault();
+
+    if (currency === 'Selecione uma moeda' 
+          || method === 'Método de pagamento'
+          || tag === 'Selecione uma Tag'
+    ) return;
 
     const wallet = {
       value,
@@ -131,6 +136,7 @@ function WalletForm() {
               value={currency}
               onChange={handleChange}
             >
+              <option disabled>Selecione uma moeda</option>
               {currencies.map((currencyName, index) => (
                 <option key={index}>{currencyName}</option>
               ))}
@@ -147,6 +153,7 @@ function WalletForm() {
               value={method}
               onChange={handleChange}
             >
+              <option disabled>Método de pagamento</option>
               <option>Dinheiro</option>
               <option>Cartão de crédito</option>
               <option>Cartão de débito</option>
@@ -163,6 +170,7 @@ function WalletForm() {
               value={tag}
               onChange={handleChange}
             >
+              <option disabled>Selecione uma Tag</option>
               <option>Alimentação</option>
               <option>Lazer</option>
               <option>Trabalho</option>
